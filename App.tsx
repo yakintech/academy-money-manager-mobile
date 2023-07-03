@@ -1,7 +1,8 @@
-import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getAllOperations, saveOperation } from './src/services/sql/operationServices'
 import { Operation } from './src/models/Operation'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 const App = () => {
@@ -15,6 +16,23 @@ const App = () => {
   const [amount, setamount] = useState('0')
   const [note, setnote] = useState('')
 
+  const [selectedDate, setSelectedDate] = useState<any>(null);
+  const [datePickerVisible, setDatePickerVisible] = useState<boolean>(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisible(false);
+  };
+
+  const handleConfirm = (date:Date) => {
+    setSelectedDate(date);
+    hideDatePicker();
+  };
+
+
   const addNewOperation = () => {
 
 
@@ -23,18 +41,29 @@ const App = () => {
       amount: Number(amount),
       type: 'Income',
       category: category,
-      // addDate: Date.now()
+      addDate: Date.now() && selectedDate
     }
   }
 
   return (
     <SafeAreaView>
       <View>
-     
+
       </View>
       <View>
-        <Text>Date: </Text>
-        <TextInput style={styles.input} value={addDate} onChangeText={setaddDate} />
+        <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 5 }}>
+          {selectedDate ? selectedDate.toLocaleDateString() : 'No date selected'}
+        </Text>
+        <TouchableOpacity onPress={showDatePicker}>
+          <Text>Select Date</Text>
+        </TouchableOpacity>
+        
+        <DateTimePickerModal
+          isVisible={datePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
       </View>
 
       <View>

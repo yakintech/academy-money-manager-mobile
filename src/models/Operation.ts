@@ -3,7 +3,8 @@ export interface Operation{
     amount:Number
     category:String
     note:String
-    type: 'Income' | 'Spending'
+    type: 'Income' | 'Spending',
+    addDate:Date
 }
 
 
