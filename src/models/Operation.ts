@@ -1,8 +1,8 @@
 export interface Operation{
-    // addDate: Date
-    amount:Number
-    category:String
-    note:String
+    addDate: Date
+    amount:number
+    category:string
+    note:string
     type: 'Income' | 'Spending'
 }
 
