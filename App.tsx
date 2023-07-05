@@ -7,6 +7,8 @@ import moment from 'moment'
 
 import { Picker } from '@react-native-picker/picker';
 import IncomeList from './src/screens/IncomeList'
+import ParentComp from './src/screens/ParentComp'
+import DependencySample from './src/screens/DependencySample'
 
 const App = () => {
 
@@ -41,7 +43,7 @@ const App = () => {
 
   }
 
-     return <IncomeList/>
+     return <DependencySample/>
 
   return (
     <SafeAreaView>
